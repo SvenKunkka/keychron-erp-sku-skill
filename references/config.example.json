@@ -1,4 +1,5 @@
 {
+  "request_text": "申请 MODEL-X 的 SKU",
   "image": "/absolute/path/to/verified-product-image.jpg",
   "skus": [
     {

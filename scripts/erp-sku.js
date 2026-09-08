@@ -14,6 +14,9 @@ const REMARK_LIMIT = 130;
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif']);
 const TEXT_FIELDS = new Set(['SKU 编码', '中文描述', '英文描述', '键帽颜色', '主控IC', '轴体']);
 const SELECT_FIELDS = new Set(['类目', '单位', '产品负责人', '状态', '品牌', '系列', '类型', '特殊属性', '销售标签', '库存严控']);
+const APPLICATION_ACTION = /(申请|新增|新建|创建|提交)/u;
+const SKU_KEYWORD = /(^|[^A-Za-z0-9])SKU([^A-Za-z0-9]|$)/iu;
+const INFORMATIONAL_INTENT = /(?:如何|怎么|怎样|是否|能否).{0,12}(?:申请|新增|新建|创建|提交)|(?:申请|新增|新建|创建|提交).{0,12}(?:流程|方法|条件|说明)|SKU.{0,12}(?:是什么|有哪些|有没有|多少|列表)/iu;
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 let activeChrome = null;
@@ -213,7 +216,22 @@ function loadConfig(configPath, submitting) {
       image,
     };
   });
-  return { skus };
+  const requestText = typeof config.request_text === 'string' ? config.request_text.trim() : '';
+  if (submitting) validateSubmissionIntent(requestText, skus.map(sku => sku.name));
+  return { skus, requestText };
+}
+
+function validateSubmissionIntent(requestText, modelNames) {
+  if (!requestText) throw new Error('提交配置缺少 request_text；必须原样保存当前用户消息');
+  if (!APPLICATION_ACTION.test(requestText)) throw new Error('当前消息没有明确的 SKU 申请动作');
+  if (!SKU_KEYWORD.test(requestText)) throw new Error('当前消息缺少 SKU 关键词');
+  if (INFORMATIONAL_INTENT.test(requestText)) throw new Error('当前消息是咨询或查询，不构成 SKU 提交授权');
+  for (const modelName of modelNames) {
+    if (!requestText.toUpperCase().includes(modelName.toUpperCase())) {
+      throw new Error(`当前消息未明确包含配置型号：${modelName}`);
+    }
+  }
+  return true;
 }
 
 function safeShotName(name) {
@@ -472,4 +490,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { loadConfig, loadSettings, validateImage, validRemark: value => typeof value === 'string' && value.length <= REMARK_LIMIT };
+module.exports = { loadConfig, loadSettings, validateImage, validateSubmissionIntent, validRemark: value => typeof value === 'string' && value.length <= REMARK_LIMIT };

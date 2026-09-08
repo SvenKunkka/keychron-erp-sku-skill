@@ -6,7 +6,7 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
-const { loadConfig, loadSettings, validRemark } = require('./erp-sku.js');
+const { loadConfig, loadSettings, validateSubmissionIntent, validRemark } = require('./erp-sku.js');
 
 function temporaryFile(name, value) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'erp-sku-test-'));
@@ -51,4 +51,16 @@ test('settings require a valid HTTPS ERP URL and preserve configurable labels', 
   assert.equal(settings.successStatusText, 'Pending review');
   const insecure = temporaryFile('insecure.json', { erp_url: 'http://erp.example.com/new-sku' });
   assert.throws(() => loadSettings(insecure), /必须使用 HTTPS/);
+});
+
+test('submission intent requires action, SKU keyword and every exact model', () => {
+  assert.equal(validateSubmissionIntent('申请 V5U-W1 的 SKU', ['V5U-W1']), true);
+  assert.equal(validateSubmissionIntent('帮我新增 G6 的全新 sku', ['G6']), true);
+  assert.equal(validateSubmissionIntent('提交 Q19 HE SKU 申请', ['Q19 HE']), true);
+
+  assert.throws(() => validateSubmissionIntent('V5U-W1', ['V5U-W1']), /申请动作/);
+  assert.throws(() => validateSubmissionIntent('查询 G6 的 SKU', ['G6']), /申请动作/);
+  assert.throws(() => validateSubmissionIntent('如何申请 G6 SKU', ['G6']), /咨询或查询/);
+  assert.throws(() => validateSubmissionIntent('申请 G6', ['G6']), /SKU 关键词/);
+  assert.throws(() => validateSubmissionIntent('申请 G6 SKU', ['Q19 HE']), /未明确包含配置型号/);
 });

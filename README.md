@@ -32,7 +32,7 @@ Fill the local file with your authorized ERP URL and organization-specific label
 
 ## Prepare a request
 
-Create a configuration based on `references/config.example.json`. Use only facts read from the exact model's current specification/configuration sources and a real product image.
+Create a configuration based on `references/config.example.json`. Preserve the current user message verbatim in `request_text`; the submit path independently verifies the action, `SKU` keyword, and every configured model. Use only facts read from the exact model's current specification/configuration sources and a real product image.
 
 Validate without opening a browser:
 

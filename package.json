@@ -1,0 +1,17 @@
+{
+  "name": "keychron-erp-sku-skill",
+  "version": "1.0.0",
+  "description": "Codex Skill and safe browser automation helper for new customized ERP SKU requests.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SvenKunkka/keychron-erp-sku-skill.git"
+  },
+  "scripts": {
+    "check": "node --check scripts/erp-sku.js",
+    "test": "node --test scripts/erp-sku.test.js"
+  },
+  "dependencies": {
+    "puppeteer-core": "25.10.0"
+  }
+}

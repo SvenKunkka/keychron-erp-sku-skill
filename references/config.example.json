@@ -1,0 +1,24 @@
+{
+  "image": "/absolute/path/to/verified-product-image.jpg",
+  "skus": [
+    {
+      "name": "MODEL-X",
+      "text": {
+        "中文描述": "MODEL-X 产品描述",
+        "英文描述": "MODEL-X Product Description",
+        "键帽颜色": "黑",
+        "主控IC": "VERIFIED_CONTROLLER",
+        "轴体": "VERIFIED_SWITCH_OR_NOT_APPLICABLE"
+      },
+      "select": {
+        "类目": "鼠标",
+        "单位": "个",
+        "产品负责人": "REPLACE_WITH_OWNER",
+        "品牌": "REPLACE_WITH_BRAND",
+        "系列": "REPLACE_WITH_SERIES",
+        "特殊属性": "内置电池"
+      },
+      "remark": "只填写已从精确型号资料核实的关键规格，且不超过130字符"
+    }
+  ]
+}

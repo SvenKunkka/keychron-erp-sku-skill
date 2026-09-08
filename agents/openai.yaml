@@ -1,0 +1,7 @@
+interface:
+  display_name: "ERP 全新 SKU 申请"
+  short_description: "核实型号资料并安全填写或提交全新 SKU 申请"
+  default_prompt: "Use $keychron-erp-sku to prepare a verified new customized SKU request for this product model."
+
+policy:
+  allow_implicit_invocation: true

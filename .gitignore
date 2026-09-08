@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+references/project-config.local.json
+references/local-automation-policy.md
+screenshots/
+shots/
+tmp/
+sku-config*.json

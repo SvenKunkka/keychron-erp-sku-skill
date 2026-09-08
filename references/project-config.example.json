@@ -1,0 +1,13 @@
+{
+  "erp_url": "https://erp.example.com/path/to/new-sku-list",
+  "new_button_text": "新增定制全新SKU",
+  "submit_button_text": "确定",
+  "cancel_button_text": "取消",
+  "submit_path_contains": "/path/to/new-sku",
+  "list_row_marker": "创建时间",
+  "success_status_text": "待审核",
+  "sku_ean_workbook": "REPLACE_WITH_PRIVATE_WORKBOOK_URL_OR_TOKEN",
+  "project_workbook": "REPLACE_WITH_PRIVATE_PROJECT_URL_OR_TOKEN",
+  "project_sheet": "REPLACE_WITH_SHEET_ID",
+  "default_owner": "REPLACE_WITH_OWNER"
+}

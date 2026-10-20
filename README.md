@@ -1,3 +1,7 @@
+<!-- SVENKUNKKA-README-NAV:BEGIN -->
+[中文项目说明](#project-overview-zh) · [English overview](#project-overview-en) · [维护者 X / Maintainer on X](https://x.com/Svenu1s5)
+<!-- SVENKUNKKA-README-NAV:END -->
+
 # ERP New SKU Codex Skill
 
 A Codex Skill and browser automation helper for preparing and submitting **new customized master SKU** requests from verified model specifications.
@@ -73,3 +77,30 @@ npm run check
 ## License
 
 MIT
+
+
+---
+
+<!-- SVENKUNKKA-PROJECT-INFO:BEGIN -->
+
+<a id="project-overview-zh"></a>
+## 中文项目说明
+
+为新增定制主 SKU 申请提供 Codex Skill 与浏览器辅助工具，依据精确型号资料、现有 SKU 记录和真实产品图准备申请，包含校验、预览及提交结果回读。
+
+**使用入口：** 使用 `npm ci --omit=dev` 安装依赖，基于示例创建本地配置；先运行 `node scripts/erp-sku.js --config /absolute/path/to/skus.json --validate-only`，预览与提交方式见原文。
+
+**范围说明：** 默认只预览；提交必须满足明确申请动作、SKU 关键词与具体型号要求，不处理尾缀 SKU，结果不确定时不自动重试。
+
+<a id="project-overview-en"></a>
+## English project overview
+
+A Codex Skill and browser helper for new customized master-SKU requests, using exact-model evidence, existing SKU records, and real product images, with validation, preview, and submission readback.
+
+**Getting started:** Install dependencies with `npm ci --omit=dev` and create local settings from the examples. Start with `node scripts/erp-sku.js --config /absolute/path/to/skus.json --validate-only`; see the original README for preview and submission.
+
+**Scope:** Preview is the default. Submission requires an explicit application action, the SKU keyword, and a specific model. Suffix-only SKUs are out of scope, and uncertain submissions are not retried automatically.
+
+**仓库维护者 / Repository maintainer:** [SvenKunkka](https://github.com/SvenKunkka) · [X / Twitter](https://x.com/Svenu1s5)
+
+<!-- SVENKUNKKA-PROJECT-INFO:END -->
